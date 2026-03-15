@@ -1,0 +1,47 @@
+[
+    {
+        "id": "1",
+        "title": "The Power of Creative Direction",
+        "date": "October 12, 2026",
+        "excerpt": "Discover how strong creative direction forms the backbone of every successful digital brand.",
+        "imageUrl": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3",
+        "content": "Strong creative direction isn't just about making things look good; it's about telling a cohesive story that resonates with your audience. When we approach a new project at CREATIIX, the first step is always understanding the core narrative. Why does this brand exist? Who are we talking to? Once those questions are answered, every visual choice—from color palettes to typography—becomes incredibly deliberate. In this post, we'll explore why investing in creative direction early saves time and amplifies impact down the road.",
+        "category": "Designing"
+    },
+    {
+        "id": "2",
+        "title": "Designing for the Future Web",
+        "date": "October 28, 2026",
+        "excerpt": "A look at the emerging trends in web design and how to balance aesthetics with performance.",
+        "imageUrl": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3",
+        "content": "The web is evolving fast. Immersive 3D experiences, micro-interactions, and brutalist layouts are redefining what a website can be. However, with all this visual flair, performance remains critical. Users won't wait for your stunning animations to load if it takes 10 seconds. In this article, we break down our approach to building high-performance websites that don't sacrifice style. It's all about optimized assets, smart loading strategies, and knowing when a simple hover effect is more powerful than a complex WebGL scene.",
+        "category": "Designing"
+    },
+    {
+        "id": "3",
+        "title": "Building a Premium Brand Identity",
+        "date": "November 05, 2026",
+        "excerpt": "Key steps to establishing a brand that feels luxurious and trustworthy.",
+        "imageUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1564&ixlib=rb-4.0.3",
+        "content": "What makes a brand feel premium? It's the white space. It's the subtle easing on an animation. It's the consistency across every touchpoint. A premium brand identity requires discipline. You must resist the urge to fill every blank space and shout your message. Instead, trust the design to speak for itself. We'll share three key principles we use at CREATIIX to help our clients achieve that coveted look and feel of effortless luxury.",
+        "category": "Marketing"
+    },
+    {
+        "id": "4",
+        "title": "Unlocking AI for Content Generation",
+        "date": "December 15, 2026",
+        "excerpt": "How to ethically and effectively use AI tools to supercharge your content marketing strategy.",
+        "imageUrl": "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1632&ixlib=rb-4.0.3",
+        "content": "Artificial Intelligence is no longer just a buzzword; it's a practical tool that is reshaping how we approach content creation. From brainstorming initial concepts to drafting copy and even generating visual assets, AI can significantly accelerate the creative process. However, the goal shouldn't be to replace human creativity, but to augment it. In this guide, we explore best practices for integrating AI into your workflow, ensuring your brand's unique voice remains authentic while maximizing efficiency.",
+        "category": "AI"
+    },
+    {
+        "id": "5",
+        "title": "Data-Driven Marketing in 2027",
+        "date": "January 10, 2027",
+        "excerpt": "Navigating the new landscape of privacy-first analytics and what it means for your campaigns.",
+        "imageUrl": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1415&ixlib=rb-4.0.3",
+        "content": "With increasing privacy regulations and the phase-out of third-party cookies, digital marketing is undergoing a fundamental shift. We can no longer rely on the tracking methods of the past. Success now depends on building robust first-party data strategies and leveraging predictive analytics. This post breaks down how your brand can pivot to a privacy-first marketing approach that still delivers highly targeted, personalized experiences to your audience.",
+        "category": "Marketing"
+    }
+]
