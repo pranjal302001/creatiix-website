@@ -2,7 +2,6 @@ export const servicesCategories = [
     {
         id: "01",
         title: "Graphic Design",
-        image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=2942&auto=format&fit=crop",
         services: [
             {
                 title: "Brand Identity & Logo Systems",
@@ -48,8 +47,7 @@ export const servicesCategories = [
     },
     {
         id: "02",
-        title: "Website Design",
-        image: "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=2940&auto=format&fit=crop",
+        title: "Website Redesign",
         services: [
             {
                 title: "Strategic Web Design & UI/UX",
@@ -100,7 +98,6 @@ export const servicesCategories = [
     {
         id: "03",
         title: "Video Editing",
-        image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=2940&auto=format&fit=crop",
         services: [
             {
                 title: "Short-Form & Social Media",
@@ -151,7 +148,6 @@ export const servicesCategories = [
     {
         id: "04",
         title: "Content Writing",
-        image: "https://images.unsplash.com/photo-1432821596592-e2c18b78144f?q=80&w=2940&auto=format&fit=crop",
         services: [
             {
                 title: "SEO & AI Search Optimization",
@@ -202,7 +198,6 @@ export const servicesCategories = [
     {
         id: "05",
         title: "Social Media Management",
-        image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?q=80&w=2874&auto=format&fit=crop",
         services: [
             {
                 title: "Strategic Management & Growth",

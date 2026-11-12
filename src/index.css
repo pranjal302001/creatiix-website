@@ -2,17 +2,92 @@
 @tailwind components;
 @tailwind utilities;
 
+/* "Blend" theme: Midnight #050505, Ivory #FFF4E6, and a gradient running
+   Flameburst #FC5000 → Orange #FF7A00 → Peach #FFD3A3.
+   Values are "R G B" so Tailwind can apply opacity. Dark is the default. */
+:root {
+  --radius: 20px; /* the one corner radius used everywhere */
+  --glass: rgb(255 255 255 / 0.055);
+  --glass-border: rgb(255 255 255 / 0.13);
+  --glass-shine: rgb(255 255 255 / 0.18);
+  --glow: 0.5;
+  --bg: 5 5 5;
+  --surface: 14 13 12;
+  --ink: 255 244 230;
+  --support: 255 211 163;
+  --muted: 156 163 175;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --glass: rgb(255 255 255 / 0.5);
+  --glass-border: rgb(255 255 255 / 0.9);
+  --glass-shine: rgb(255 255 255 / 1);
+  --glow: 0.36;
+  --bg: 255 244 230;
+  --surface: 252 236 216;
+  --ink: 5 5 5;
+  --support: 190 84 0;
+  --muted: 100 104 112;
+  color-scheme: light;
+}
+
 @layer base {
+  body {
+    background-color: rgb(var(--bg));
+    color: rgb(var(--ink));
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
   body::after {
     content: '';
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 9999;
-    opacity: 0.08;
+    opacity: 0.06;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
 }
+
+/* Frosted glass panel: cards, navbar, chips */
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  backdrop-filter: blur(22px) saturate(160%);
+  box-shadow: inset 0 1px 0 var(--glass-shine), 0 18px 40px rgb(0 0 0 / 0.18);
+}
+
+/* Gradient text for highlighted words */
+.text-grad {
+  background-image: linear-gradient(100deg, #FC5000, #FF7A00 55%, #FFD3A3);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-right: 0.08em; /* keeps italic letters from being clipped */
+}
+:root[data-theme="light"] .text-grad {
+  background-image: linear-gradient(100deg, #FC5000, #FF7A00);
+}
+
+/* Soft colour glows placed behind glass so the frosting has something to blur */
+.glow {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: var(--glow);
+  pointer-events: none;
+}
+.glow-flame { background: radial-gradient(closest-side, #FC5000, #FF7A00 55%, transparent); }
+.glow-orange { background: radial-gradient(closest-side, #FF7A00, transparent); }
+.glow-peach { background: radial-gradient(closest-side, #FFD3A3, transparent); }
+
+/* Show the logo wordmark that matches the current mode */
+.logo-for-light { display: none; }
+:root[data-theme="light"] .logo-for-light { display: block; }
+:root[data-theme="light"] .logo-for-dark { display: none; }
 
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
@@ -28,4 +103,15 @@
 
 .lenis.lenis-smooth iframe {
   pointer-events: none;
+}
+
+/* Demo sites inside a browser frame are meant to be clicked and scrolled */
+.lenis.lenis-smooth iframe.demo-iframe {
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee, .animate-marquee-reverse, .animate-spin-slow, .animate-dash-flow {
+    animation: none !important;
+  }
 }

@@ -9,7 +9,7 @@ export default function AboutUs() {
     const textRef = useRef(null);
     const badgeRef = useRef(null);
 
-    const textStr = "At CREATIIX, we believe that great brands are built with creativity, strategy, and purpose. We are a full-service creative agency transforming ideas into powerful visual identities and impactful digital experiences that drive measurable growth.";
+    const textStr = "At CREATIIX, we believe great brands are built with creativity, strategy, and technology. We design the identity, build the websites and apps, and wire in AI that answers, automates and acts, so your business keeps growing while you focus on the work.";
     const words = textStr.split(' ');
 
     useEffect(() => {
@@ -24,7 +24,7 @@ export default function AboutUs() {
                     end: "bottom bottom",
                     scrub: 1,
                 },
-                color: "#FFFFFF",
+                opacity: 1,
                 stagger: 0.1,
                 ease: "none"
             });
@@ -74,29 +74,20 @@ export default function AboutUs() {
         // Make container very tall to allow scrolling space for the scrub
         <section id="about" ref={containerRef} className="relative h-[300vh] bg-background">
 
-            {/* Massive Abstract Texture Background */}
-            <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden opacity-10 mix-blend-screen">
-                <img
-                    src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2864&auto=format&fit=crop"
-                    alt="Abstract Texture"
-                    className="w-full h-[150vh] object-cover -translate-y-[20vh] filter blur-xl"
-                />
-            </div>
-
             <div className="pinned-content absolute top-0 left-0 w-full h-screen flex items-center justify-center overflow-hidden px-6 md:px-16 p-20 z-0">
 
                 {/* Floating Interactive Badge */}
-                <div ref={badgeRef} className="absolute left-0 top-0 w-32 h-32 md:w-48 md:h-48 z-20 pointer-events-none mix-blend-difference hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div ref={badgeRef} className="absolute left-0 top-0 w-32 h-32 md:w-48 md:h-48 z-20 pointer-events-none hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <svg className="rotate-text w-full h-full" viewBox="0 0 200 200">
                         <path id="curve" d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0" fill="transparent" />
-                        <text width="500" className="text-[#F5DF77] font-mono text-xl uppercase tracking-[0.2em] fill-current">
+                        <text width="500" className="text-accent font-mono text-xl uppercase tracking-[0.16em] fill-current">
                             <textPath href="#curve">
                                 Scroll to read our story — Scroll to read our story —
                             </textPath>
                         </text>
                     </svg>
                     {/* Center dot */}
-                    <div className="absolute w-4 h-4 bg-[#F5DF77] rounded-full" />
+                    <div className="absolute w-4 h-4 bg-accent rounded-full" />
                 </div>
 
                 {/* The Massive Text */}
@@ -106,11 +97,11 @@ export default function AboutUs() {
                 >
                     <h2
                         ref={textRef}
-                        className="font-display font-medium text-4xl md:text-6xl lg:text-[5vw] leading-[1.1] tracking-tight uppercase"
+                        className="font-display font-medium text-3xl md:text-5xl lg:text-[4.2vw] leading-[1.1] tracking-tight"
                     >
                         {words.map((word, i) => (
                             <React.Fragment key={i}>
-                                <span className="text-white/10 transition-colors duration-300">
+                                <span className="text-ink opacity-10">
                                     {word}
                                 </span>
                                 {' '}

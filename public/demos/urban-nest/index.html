@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Urban Nest Properties · Homes across Mumbai (Demo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="demo-bar"><b>Demo website</b> built by CREATIIX. Urban Nest Properties is fictional; listings and prices are not real.</div>
+<header><div class="wrap">
+  <a class="brand" href="index.html"><i>U</i>Urban Nest</a>
+  <nav><a href="#listings">Properties</a><a href="#how">How it works</a><a href="#areas">Areas</a><a href="#contact">Contact</a></nav>
+  <a class="btn" href="#contact">Book a visit</a>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <p class="eyebrow">Mumbai · Buy · Rent · Commercial</p>
+  <h1>Find a home in Mumbai that fits your life.</h1>
+  <p>Verified homes and offices from Borivali to Bandra, with one advisor who stays with you from the first visit to the keys.</p>
+</div></div>
+
+<div class="search"><div class="wrap">
+  <form id="search" onsubmit="return false">
+    <div class="toggle" role="group" aria-label="Buy or rent">
+      <button type="button" data-deal="Buy" aria-pressed="true">Buy</button>
+      <button type="button" data-deal="Rent" aria-pressed="false">Rent</button>
+    </div>
+    <div><label for="f-area">Area</label><select id="f-area"><option value="">All areas</option></select></div>
+    <div><label for="f-type">Type</label><select id="f-type"><option value="">Any type</option><option value="1">1 BHK</option><option value="2">2 BHK</option><option value="3">3 BHK</option><option value="Office">Office</option><option value="Shop">Shop</option></select></div>
+    <div><label for="f-budget">Budget up to</label><select id="f-budget"></select></div>
+    <a class="btn gold" href="#listings">Search</a>
+  </form>
+</div></div>
+
+<section id="listings"><div class="wrap">
+  <div class="head"><div><p class="eyebrow">Available now</p><h2>Handpicked properties</h2></div><p id="count"></p></div>
+  <div class="grid" id="grid"></div>
+</div></section>
+
+<section class="band" id="how"><div class="wrap">
+  <div class="head"><div><p class="eyebrow">How it works</p><h2>Four steps to your keys</h2></div></div>
+  <div class="steps">
+    <div class="step"><b>1</b><h3>Tell us what you need</h3><p>Budget, area and must-haves. It takes two minutes.</p></div>
+    <div class="step"><b>2</b><h3>Get a shortlist</h3><p>Only homes that match, with honest notes on each.</p></div>
+    <div class="step"><b>3</b><h3>Visit together</h3><p>We line up visits back to back, on a day that suits you.</p></div>
+    <div class="step"><b>4</b><h3>Paperwork, handled</h3><p>Negotiation, agreement and registration, start to finish.</p></div>
+  </div>
+</div></section>
+
+<section id="areas"><div class="wrap">
+  <div class="head"><div><p class="eyebrow">Where we work</p><h2>Browse by area</h2></div><p>Tap an area to filter the listings.</p></div>
+  <div class="areas" id="area-chips"></div>
+</div></section>
+
+<section id="contact" style="padding-top:0"><div class="wrap contact">
+  <div>
+    <p class="eyebrow">Talk to an advisor</p>
+    <h2 style="font-size:clamp(28px,3.4vw,42px);margin:10px 0 14px">Tell us what you are looking for.</h2>
+    <p style="color:var(--muted);max-width:420px">Share a few details and an advisor will come back with a shortlist. No spam, no pressure.</p>
+  </div>
+  <form id="enquiry">
+    <div><label for="c-name">Your name</label><input id="c-name" required autocomplete="name"></div>
+    <div><label for="c-phone">Phone number</label><input id="c-phone" type="tel" required autocomplete="tel"></div>
+    <div><label for="c-msg">What are you looking for?</label><textarea id="c-msg" rows="3" placeholder="2 BHK in Andheri West, budget ₹2 Cr"></textarea></div>
+    <button class="btn">Request a shortlist</button>
+    <p class="ok" id="ok" hidden>Thanks! In a real site this enquiry would reach the sales team instantly. This is a demo, so nothing was sent.</p>
+  </form>
+</div></section>
+
+<footer><div class="wrap"><span>© Urban Nest Properties (fictional demo brand)</span><span>Website designed and built by CREATIIX</span></div></footer>
+
+<script src="listings.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

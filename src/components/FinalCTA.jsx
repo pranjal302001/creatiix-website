@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { ArrowRight, MessageCircle } from 'lucide-react';
+import { CONTACT, goToContact, whatsappLink } from '../lib/site';
 
 export default function FinalCTA() {
     const container = useRef(null);
@@ -8,58 +10,33 @@ export default function FinalCTA() {
         const ctx = gsap.context(() => {
             gsap.fromTo('.cta-content',
                 { scale: 0.95, opacity: 0 },
-                {
-                    scrollTrigger: {
-                        trigger: container.current,
-                        start: "top 75%",
-                    },
-                    scale: 1,
-                    opacity: 1,
-                    duration: 0.8,
-                    ease: "back.out(1.5)"
-                }
+                { scrollTrigger: { trigger: container.current, start: "top 75%" }, scale: 1, opacity: 1, duration: 0.8, ease: "back.out(1.5)" }
             );
         }, container);
         return () => ctx.revert();
     }, []);
 
     return (
-        <section ref={container} className="py-0 px-6 md:px-16 w-full mb-24">
-            <div className="cta-content max-w-7xl mx-auto bg-accent text-primary rounded-[3rem] py-32 px-10 md:px-20 text-center flex flex-col items-center shadow-2xl overflow-hidden relative">
-                <div className="absolute inset-0 opacity-10 background-radial bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary via-transparent to-transparent pointer-events-none mix-blend-overlay" />
-
-                <h2 className="font-drama italic text-6xl md:text-8xl leading-none mb-6 font-black capitalize z-10">
-                    Ready to scale?
+        <section ref={container} className="relative px-6 md:px-16 w-full pb-24 bg-background overflow-hidden">
+            <i className="glow glow-flame w-[50rem] h-[26rem] left-1/2 -translate-x-1/2 top-10" />
+            <div className="cta-content relative max-w-7xl mx-auto glass text-ink py-24 md:py-32 px-8 md:px-20 text-center flex flex-col items-center">
+                <h2 className="font-display font-bold tracking-tight text-5xl md:text-7xl leading-none mb-6">
+                    Ready to <span className="font-drama italic font-normal normal-case tracking-normal text-grad">build?</span>
                 </h2>
 
-                <p className="font-body text-xl md:text-2xl font-bold uppercase mb-12 max-w-2xl tracking-widest text-[#5e4b10] z-10">
-                    Stop juggling agencies. Start dominating your industry.
+                <p className="font-body text-lg md:text-xl font-semibold uppercase mb-12 max-w-2xl tracking-widest text-ink/60">
+                    One team for AI, apps, design and marketing.
                 </p>
 
-                <button
-                    className="group relative px-10 py-5 bg-primary text-contrast font-body hover:bg-white hover:text-primary transition-colors duration-300 font-bold tracking-widest uppercase overflow-hidden z-10 flex items-center gap-4 rounded"
-                    onMouseEnter={() => {
-                        const ring = document.getElementById('cursor-ring');
-                        if (ring) {
-                            ring.classList.add('scale-150');
-                            ring.style.backgroundColor = '#232838'; // Darker background to contrast on the green CTA block
-                            ring.style.mixBlendMode = 'normal';
-                        }
-                    }}
-                    onMouseLeave={() => {
-                        const ring = document.getElementById('cursor-ring');
-                        if (ring) {
-                            ring.classList.remove('scale-150');
-                            ring.style.backgroundColor = 'transparent';
-                            ring.style.mixBlendMode = 'difference';
-                        }
-                    }}
-                >
-                    <span>Book a free 30-minute consultation</span>
-                    <svg className="w-5 h-5 group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                </button>
+                <div className="flex flex-wrap items-center justify-center gap-4">
+                    <button onClick={goToContact} className="group px-9 py-5 bg-brand text-onaccent font-body font-bold tracking-widest uppercase text-sm flex items-center gap-4 rounded-2xl hover:brightness-110 transition duration-300">
+                        <span>Start your project</span>
+                        <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                    </button>
+                    <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="px-9 py-5 glass text-ink font-body font-bold tracking-widest uppercase text-sm flex items-center gap-3 hover:text-accent transition-colors duration-300">
+                        <MessageCircle className="w-5 h-5" /> WhatsApp us
+                    </a>
+                </div>
             </div>
         </section>
     );

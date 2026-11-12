@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CREATIIX Brand Sheet</title>
+<link rel="icon" type="image/png" href="/brand/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Outfit:wght@300..700&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* CREATIIX brand sheet. Values mirror src/index.css and tailwind.config.js. */
+:root{--midnight:#050505;--ivory:#FFF4E6;--flame:#FC5000;--orange:#FF7A00;--peach:#FFD3A3;--surface-d:#0E0D0C;--surface-l:#FCECD8;--burnt:#BE5400;--r:20px;
+ --grad:linear-gradient(100deg,#FC5000,#FF7A00 55%,#FFD3A3)}
+*{box-sizing:border-box;margin:0}
+body{font-family:Outfit,sans-serif;background:var(--ivory);color:var(--midnight);line-height:1.55;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.wrap{max-width:1100px;margin:0 auto;padding:0 32px}
+.display{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;letter-spacing:-.03em;line-height:1.02}
+.serif{font-family:"Instrument Serif",serif;font-style:italic;font-weight:400;letter-spacing:-.01em}
+.mono{font-family:"Space Mono",monospace;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+.grad-text{background:linear-gradient(100deg,#FC5000,#FF7A00);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.08em}
+.dark .grad-text{background-image:var(--grad)}
+.muted{opacity:.66}
+.cover{background:var(--midnight);color:var(--ivory);padding:90px 0 80px;position:relative;overflow:hidden}
+.cover::after{content:"";position:absolute;left:50%;bottom:-320px;width:900px;height:520px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(closest-side,#FC5000,#FF7A00 55%,transparent);filter:blur(90px);opacity:.55}
+.cover .wrap{position:relative;z-index:1}
+.cover h1{font-size:76px;margin:26px 0 14px}
+section{padding:72px 0;border-bottom:1px solid rgba(5,5,5,.1)}
+section.dark{background:var(--midnight);color:var(--ivory);border:0}
+h2{font-size:44px;margin:10px 0 8px}
+.lead{max-width:640px;font-size:18px;font-weight:300;margin-bottom:36px}
+.label{color:var(--flame)}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.g5{grid-template-columns:repeat(5,1fr)}
+.card{border-radius:var(--r);border:1px solid rgba(5,5,5,.12);background:#fff8;padding:22px}
+.dark .card{border-color:rgba(255,255,255,.13);background:rgba(255,255,255,.055)}
+.logo-tile{border-radius:var(--r);padding:36px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;min-height:230px;border:1px solid rgba(5,5,5,.1)}
+.logo-tile img.mark{height:92px}.logo-tile img.word{height:26px}
+.cap{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.6;margin-top:10px}
+.sw{border-radius:var(--r);overflow:hidden;border:1px solid rgba(5,5,5,.12);background:#fff}
+.sw .chip{height:120px}
+.sw .info{padding:14px 16px}
+.sw b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:18px}
+.sw code,.spec code{font-family:"Space Mono",monospace;font-size:12.5px;display:block;opacity:.75}
+.sw small{display:block;margin-top:8px;font-size:13.5px;opacity:.7;line-height:1.4}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-align:left;opacity:.55;font-weight:400;padding:0 14px 10px 0}
+td{padding:14px 14px 14px 0;border-top:1px solid rgba(5,5,5,.1);vertical-align:middle}
+.dark td{border-color:rgba(255,255,255,.12)}
+.btn{display:inline-flex;align-items:center;font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;padding:15px 26px;border-radius:var(--r);border:0;color:#0B0F14;background:var(--grad)}
+.btn.glass{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);color:var(--ivory);backdrop-filter:blur(22px)}
+.do li,.dont li{margin:0 0 8px 18px}
+.dont{color:#8a2a00}
+.type-row{display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:baseline;padding:22px 0;border-top:1px solid rgba(5,5,5,.1)}
+.spec{font-size:14px}
+.foot{padding:36px 0;font-family:"Space Mono",monospace;font-size:12px;opacity:.6}
+.print{position:fixed;top:16px;right:16px;z-index:9}
+@page{size:A4;margin:0}
+@media print{
+ .print{display:none}
+ html,body{background:var(--ivory)}
+ .cover{height:297mm;display:flex;align-items:center;padding:0}
+ .cover .wrap{width:100%}
+ section{break-before:page;padding:16mm 0 10mm;border:0;min-height:297mm}
+ .wrap{padding:0 14mm;max-width:none}
+ h2{font-size:38px}.lead{margin-bottom:24px;font-size:16.5px}
+ .card,.sw,.logo-tile,.type-row,tr,.grid>div{break-inside:avoid}
+ .logo-tile{min-height:170px;padding:24px}.logo-tile img.mark{height:70px}
+ .sw .chip{height:84px}
+ .type-row{padding:14px 0}.type-row .display,.type-row .serif{font-size:40px !important}
+ td{padding:9px 12px 9px 0}
+ .foot{display:none}
+ .g2{grid-template-columns:repeat(2,1fr) !important}.g3{grid-template-columns:repeat(3,1fr) !important}
+ .g4{grid-template-columns:repeat(4,1fr) !important}.g5{grid-template-columns:repeat(5,1fr) !important}
+ .grid{gap:12px}
+ .sw .info{padding:10px 11px}.sw b{font-size:15px}.sw code{font-size:10.5px}.sw small{font-size:11.5px}
+ .logo-tile{min-height:140px}.g4 .logo-tile{min-height:110px;padding:14px}
+ .cap{font-size:10px}
+ .type-row{grid-template-columns:170px 1fr !important}
+ .cover h1{font-size:64px}
+ /* PDF renderers draw clipped-gradient text and gradient tiles unreliably: use solid colour in print */
+ .grad-text{background:none !important;-webkit-background-clip:border-box;background-clip:border-box;color:#FC5000 !important}
+ .dark .grad-text,.cover .grad-text{color:#FF7A00 !important}
+ .logo-tile[style*="--grad"]{background:#FF7A00 !important}
+ .type-row{padding:10px 0 !important}
+ td{padding:7px 12px 7px 0 !important}
+ section p.mono[style*="margin:4"]{margin-top:22px !important}
+}
+@media(max-width:800px){.g2,.g3,.g4,.g5{grid-template-columns:1fr 1fr}.cover h1{font-size:44px}.type-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<button class="btn print" onclick="window.print()">Save as PDF</button>
+
+<header class="cover">
+  <div class="wrap">
+    <div style="display:flex;align-items:center;gap:12px"><img src="/brand/mark.png" alt="" style="height:54px"><img src="/brand/wordmark-ivory.png" alt="CREATIIX" style="height:26px"></div>
+    <h1 class="display">Brand sheet <span class="serif grad-text">2026.</span></h1>
+    <p class="lead" style="margin:0">Logo, colour, type and interface rules for the CREATIIX website and anything made to match it.</p>
+    <p class="mono" style="margin-top:36px;opacity:.6">Version 1.0 · November 2026</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="mono label">01 · Logo</p>
+    <h2 class="display">The origami <span class="serif grad-text">bird.</span></h2>
+    <p class="lead">The mark is a folded-paper bird built from six pieces. It always appears in brand orange with a peach wing tip. Only the wordmark changes colour with the background.</p>
+    <div class="grid g2">
+      <div><div class="logo-tile" style="background:var(--midnight)"><img class="mark" src="/brand/mark.png" alt=""><img class="word" src="/brand/wordmark-ivory.png" alt="CREATIIX"></div><p class="cap">On dark · ivory wordmark · logo-on-dark.png</p></div>
+      <div><div class="logo-tile" style="background:var(--ivory)"><img class="mark" src="/brand/mark.png" alt=""><img class="word" src="/brand/wordmark-charcoal.png" alt="CREATIIX"></div><p class="cap">On light · charcoal wordmark · logo-on-light.png</p></div>
+    </div>
+    <div class="grid g4" style="margin-top:18px">
+      <div><div class="logo-tile" style="background:var(--midnight);min-height:150px"><img src="/brand/mark.png" alt="" style="height:64px"></div><p class="cap">Mark only</p></div>
+      <div><div class="logo-tile" style="background:var(--midnight);min-height:150px;flex-direction:row;gap:10px"><img src="/brand/mark.png" alt="" style="height:34px"><img src="/brand/wordmark-ivory.png" alt="" style="height:18px"></div><p class="cap">Horizontal (navbar)</p></div>
+      <div><div class="logo-tile" style="background:var(--ivory);min-height:150px"><img src="/brand/favicon.png" alt="" style="height:84px"></div><p class="cap">App icon / favicon</p></div>
+      <div><div class="logo-tile" style="background:var(--grad);min-height:150px"><img src="/brand/wordmark-charcoal.png" alt="" style="height:22px"></div><p class="cap">Wordmark on gradient</p></div>
+    </div>
+    <div class="grid g2" style="margin-top:36px">
+      <div class="card"><p class="mono label" style="margin-bottom:12px">Do</p><ul class="do">
+        <li>Keep clear space around the logo equal to the height of the wing tip.</li>
+        <li>Minimum size: mark 24px tall; full logo 120px wide.</li>
+        <li>Use the ivory wordmark on dark and the charcoal wordmark on light.</li>
+        <li>Use the supplied transparent PNG files in <code style="font-family:'Space Mono'">public/brand/</code>.</li></ul></div>
+      <div class="card"><p class="mono label" style="margin-bottom:12px">Don't</p><ul class="dont">
+        <li>Recolour the mark or put a gradient on it.</li>
+        <li>Stretch, rotate, outline or add shadows.</li>
+        <li>Place the orange mark on orange or peach backgrounds.</li>
+        <li>Retype the wordmark in another font.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="mono label">02 · Colour</p>
+    <h2 class="display">Midnight, ivory <span class="serif grad-text">and fire.</span></h2>
+    <p class="lead">Two neutrals carry the page. Orange is used sparingly: buttons, highlighted words and small labels.</p>
+    <div class="grid g5">
+      <div class="sw"><div class="chip" style="background:#050505"></div><div class="info"><b>Midnight</b><code>#050505</code><code>RGB 5 5 5</code><small>Dark-mode background. Text in light mode.</small></div></div>
+      <div class="sw"><div class="chip" style="background:#FFF4E6"></div><div class="info"><b>Ivory</b><code>#FFF4E6</code><code>RGB 255 244 230</code><small>Light-mode background. Text in dark mode.</small></div></div>
+      <div class="sw"><div class="chip" style="background:#FC5000"></div><div class="info"><b>Flameburst</b><code>#FC5000</code><code>RGB 252 80 0</code><small>Accent: labels, numbers, links, gradient start.</small></div></div>
+      <div class="sw"><div class="chip" style="background:#FF7A00"></div><div class="info"><b>Orange</b><code>#FF7A00</code><code>RGB 255 122 0</code><small>Logo colour. Middle of the gradient.</small></div></div>
+      <div class="sw"><div class="chip" style="background:#FFD3A3"></div><div class="info"><b>Peach</b><code>#FFD3A3</code><code>RGB 255 211 163</code><small>Logo wing tip. Gradient end, soft highlights.</small></div></div>
+    </div>
+    <p class="mono" style="margin:40px 0 14px;opacity:.6">Supporting colours</p>
+    <div class="grid g4">
+      <div class="sw"><div class="chip" style="background:#0E0D0C;height:70px"></div><div class="info"><b>Dark surface</b><code>#0E0D0C</code><small>Alternate sections in dark mode.</small></div></div>
+      <div class="sw"><div class="chip" style="background:#FCECD8;height:70px"></div><div class="info"><b>Light surface</b><code>#FCECD8</code><small>Alternate sections in light mode.</small></div></div>
+      <div class="sw"><div class="chip" style="background:#0B0F14;height:70px"></div><div class="info"><b>Charcoal</b><code>#0B0F14</code><small>Text on orange, gradient and peach.</small></div></div>
+      <div class="sw"><div class="chip" style="background:#BE5400;height:70px"></div><div class="info"><b>Burnt orange</b><code>#BE5400</code><small>Small accent text in light mode.</small></div></div>
+    </div>
+    <p class="mono" style="margin:40px 0 14px;opacity:.6">Brand gradient</p>
+    <div style="height:110px;border-radius:var(--r);background:var(--grad)"></div>
+    <p class="spec" style="margin-top:12px"><code>linear-gradient(100deg, #FC5000 0%, #FF7A00 55%, #FFD3A3 100%)</code></p>
+    <p style="margin-top:8px;max-width:640px" class="muted">Used on primary buttons, highlighted words, "Core focus" badges, one process card and the contact panel. Text on the gradient is always Charcoal. On light backgrounds, gradient text stops at Orange so it stays readable.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="mono label">03 · Typography</p>
+    <h2 class="display">Four fonts, <span class="serif grad-text">four jobs.</span></h2>
+    <p class="lead">All four are free Google Fonts. Headings are sentence case, never all capitals.</p>
+    <div class="type-row"><div class="spec"><b>Bricolage Grotesque</b><code>Headings · weight 700</code><code>letter-spacing −0.03em</code></div><div class="display" style="font-size:54px">Brands, apps &amp; AI systems</div></div>
+    <div class="type-row"><div class="spec"><b>Instrument Serif Italic</b><code>Highlight words only</code><code>weight 400</code></div><div class="serif" style="font-size:54px">built to <span class="grad-text">grow.</span></div></div>
+    <div class="type-row"><div class="spec"><b>Outfit</b><code>Body text · weight 300</code><code>Buttons · weight 700</code></div><div style="font-size:19px;font-weight:300;max-width:560px">One team for AI chatbots, automation and agents, websites and mobile apps, and the design and marketing that makes them sell.</div></div>
+    <div class="type-row"><div class="spec"><b>Space Mono</b><code>Labels and numbers</code><code>uppercase · 0.16em spacing</code></div><div class="mono label">01 · AI · Apps · Design · Marketing</div></div>
+
+    <p class="mono" style="margin:44px 0 14px;opacity:.6">Type scale</p>
+    <table>
+      <tr><th>Role</th><th>Font</th><th>Desktop</th><th>Mobile</th><th>Weight</th></tr>
+      <tr><td>Hero heading</td><td>Bricolage Grotesque</td><td>44–76px</td><td>36px</td><td>700</td></tr>
+      <tr><td>Section heading</td><td>Bricolage Grotesque</td><td>60px</td><td>36px</td><td>700</td></tr>
+      <tr><td>Card heading</td><td>Bricolage Grotesque</td><td>20–24px</td><td>20px</td><td>700</td></tr>
+      <tr><td>Highlight word</td><td>Instrument Serif Italic</td><td>Same as its heading</td><td>Same</td><td>400</td></tr>
+      <tr><td>Intro text</td><td>Outfit</td><td>18–20px</td><td>18px</td><td>300</td></tr>
+      <tr><td>Body text</td><td>Outfit</td><td>15–18px</td><td>15–16px</td><td>300–400</td></tr>
+      <tr><td>Button</td><td>Outfit, uppercase</td><td>12–14px</td><td>12–14px</td><td>700</td></tr>
+      <tr><td>Label</td><td>Space Mono, uppercase</td><td>13px</td><td>13px</td><td>400–700</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="wrap">
+    <p class="mono label">04 · Interface</p>
+    <h2 class="display">One curve, <span class="serif grad-text">frosted glass.</span></h2>
+    <p class="lead muted">Every button, card, input, badge and panel uses the same 20px corner. Cards are frosted glass sitting over soft orange glows.</p>
+    <div class="grid g3" style="position:relative">
+      <div style="position:absolute;inset:-40px 10% -40px 10%;border-radius:50%;background:radial-gradient(closest-side,#FC5000,#FF7A00 55%,transparent);filter:blur(80px);opacity:.45"></div>
+      <div class="card" style="position:relative;backdrop-filter:blur(22px) saturate(160%)"><p class="mono label">Corner radius</p><p class="display" style="font-size:40px;margin:10px 0">20px</p><p class="muted">Everywhere. Circles (avatars, dots) are the only exception.</p></div>
+      <div class="card" style="position:relative;backdrop-filter:blur(22px) saturate(160%)"><p class="mono label">Glass card</p><p class="muted" style="margin-top:10px;font-size:14.5px">Fill: white 5.5% (dark) / 50% (light)<br>Border: 1px white 13% / 90%<br>Blur: 22px, saturate 160%<br>Shadow: 0 18px 40px black 18%</p></div>
+      <div class="card" style="position:relative;backdrop-filter:blur(22px) saturate(160%)"><p class="mono label">Glow</p><p class="muted" style="margin-top:10px;font-size:14.5px">Radial Flameburst → Orange, blur 90px.<br>Opacity 50% (dark) / 36% (light).<br>Always behind glass, never over text.</p></div>
+    </div>
+    <p class="mono" style="margin:44px 0 16px;opacity:.6">Buttons</p>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center">
+      <span class="btn">Start your project</span><span class="btn glass">Explore our services</span>
+      <span class="mono" style="background:var(--grad);color:#0B0F14;border-radius:var(--r);padding:4px 12px;font-size:12px;font-weight:700;letter-spacing:.08em">Core focus</span>
+    </div>
+    <p class="muted" style="margin-top:14px;max-width:640px;font-size:15px">Primary: gradient fill, Charcoal text, one per screen area. Secondary: glass. Badge: gradient, Space Mono.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="mono label">05 · Modes and motion</p>
+    <h2 class="display">Dark first, <span class="serif grad-text">light ready.</span></h2>
+    <div class="grid g2" style="margin-top:28px">
+      <div class="card"><table>
+        <tr><th>Token</th><th>Dark (default)</th><th>Light</th></tr>
+        <tr><td>Background</td><td>Midnight #050505</td><td>Ivory #FFF4E6</td></tr>
+        <tr><td>Text</td><td>Ivory #FFF4E6</td><td>Midnight #050505</td></tr>
+        <tr><td>Surface</td><td>#0E0D0C</td><td>#FCECD8</td></tr>
+        <tr><td>Small accent text</td><td>Peach #FFD3A3</td><td>Burnt orange #BE5400</td></tr>
+        <tr><td>Accent, gradient</td><td colspan="2">Same in both modes</td></tr>
+      </table></div>
+      <div class="card"><p class="mono label" style="margin-bottom:12px">Motion</p><ul class="do">
+        <li>Smooth scrolling; sections fade up as they enter.</li>
+        <li>Cards lean toward the mouse (3D tilt, desktop only).</li>
+        <li>The 3D origami bird sways gently in the hero (desktop only).</li>
+        <li>Short logo reveal on first visit, about one second.</li>
+        <li>Animations stop for visitors who ask for reduced motion.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="mono label">06 · Voice</p>
+    <h2 class="display">Plain words, <span class="serif grad-text">confident tone.</span></h2>
+    <div class="grid g2" style="margin-top:28px">
+      <div class="card"><p class="mono label" style="margin-bottom:12px">We say</p><ul class="do">
+        <li>What the client gets, in simple language.</li>
+        <li>"One team for AI, apps, design and marketing."</li>
+        <li>Timelines are "as per requirement".</li>
+        <li>"Let's talk" and "Start your project" on buttons.</li>
+        <li>Examples labelled "Concept" until real work exists.</li></ul></div>
+      <div class="card"><p class="mono label" style="margin-bottom:12px">We avoid</p><ul class="dont">
+        <li>Prices or packages on the website.</li>
+        <li>Fixed delivery dates or guarantees.</li>
+        <li>Invented clients, numbers or case studies.</li>
+        <li>Jargon without a plain explanation.</li>
+        <li>Headings in all capitals.</li></ul></div>
+    </div>
+    <p class="mono" style="margin:40px 0 12px;opacity:.6">Contact shown on the site</p>
+    <p>Email: creatiixofficial@creatiix.com · WhatsApp: +91 70454 02332</p>
+  </div>
+</section>
+
+<footer class="wrap foot">CREATIIX brand sheet · values match the live website code (src/index.css, tailwind.config.js) · logo files in public/brand/</footer>
+</body>
+</html>

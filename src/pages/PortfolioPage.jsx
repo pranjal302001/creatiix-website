@@ -1,178 +1,152 @@
-import React, { useEffect, useState } from 'react';
+import { usePageMeta } from '../lib/usePageMeta';
+import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import gsap from 'gsap';
+import { Link } from 'react-router-dom';
+import { ArrowUpRight, Play, X } from 'lucide-react';
 import portfolioData from '../data/portfolioData.json';
+import PageHeader, { FilterChip } from '../components/PageHeader';
+import { goToContact } from '../lib/site';
 
-// Get unique categories from data
-const categories = ['All', ...new Set(portfolioData.map(item => item.category))];
+const categories = ['All', ...new Set(portfolioData.map((item) => item.category))];
 
-const PortfolioPage = () => {
-    const [activeCategory, setActiveCategory] = useState('All');
+// One card for every project. Videos preview silently on hover; a click opens the full view.
+function ProjectCard({ project, onOpen }) {
+    const videoRef = useRef(null);
+    const isVideo = project.type === 'video';
 
-    // Filter projects based on category
-    const filteredProjects = activeCategory === 'All'
-        ? portfolioData
-        : portfolioData.filter(project => project.category === activeCategory);
-
-    useEffect(() => {
-        // Reveal animation for items
-        gsap.fromTo(
-            ".portfolio-item",
-            { opacity: 0, y: 50 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                stagger: 0.1,
-                ease: "power3.out",
-                clearProps: "all"
-            }
-        );
-    }, [activeCategory]);
-
-    // Helper to render media based on type
-    const renderMedia = (project) => {
-        switch (project.type) {
-            case 'youtube':
-                return (
-                    <iframe
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-auto"
-                        src={project.url}
-                        title={project.title}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                    ></iframe>
-                );
-            case 'instagram':
-                // For Instagram we embed their standard code (simplified for React)
-                // Appending embed suffix to URL if missing
-                const instaUrl = project.url.endsWith('/') ? `${project.url}embed` : `${project.url}/embed`;
-                return (
-                    <iframe
-                        src={instaUrl}
-                        className="w-full h-full object-cover pointer-events-auto bg-white"
-                        frameBorder="0"
-                        scrolling="yes" // Allowing scroll for long IG captions
-                        allowTransparency="true"
-                    ></iframe>
-                );
-            case 'video':
-                return (
-                    <video
-                        src={project.url}
-                        className="w-full h-full object-contain bg-black/40 pointer-events-auto"
-                        controls
-                        controlsList="nodownload"
-                        playsInline
-                        preload="metadata"
-                    />
-                );
-            case 'image':
-            default:
-                return (
-                    <img
-                        src={project.url}
-                        alt={project.title}
-                        className={`w-full h-full transition-transform duration-[1.5s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-110 ${project.contain ? 'object-contain p-8 bg-white' : 'object-cover filter brightness-75 group-hover:brightness-100'}`}
-                    />
-                );
-        }
+    const preview = (play) => {
+        const v = videoRef.current;
+        if (!v) return;
+        if (play) v.play().catch(() => { });
+        else { v.pause(); v.currentTime = 0; }
     };
 
     return (
-        <div className="min-h-screen bg-background text-white pt-32 pb-24 px-6 md:px-16 overflow-hidden">
-            {/* Header */}
-            <div className="max-w-7xl mx-auto mb-16">
-                <h1 className="font-display font-black text-5xl md:text-7xl uppercase tracking-tighter mix-blend-difference mb-6">
-                    <span className="text-secondary/70">Selected</span> Works
-                </h1>
-                <p className="font-sans text-xl md:text-2xl text-secondary/60 max-w-2xl font-light">
-                    A curated collection of our finest projects across design, development, and motion.
-                </p>
+        <button
+            onClick={() => onOpen(project)}
+            aria-label={project.title || `Play ${project.category.toLowerCase()} reel`}
+            onMouseEnter={() => preview(true)}
+            onMouseLeave={() => preview(false)}
+            data-tilt
+            className="portfolio-item glass group relative block w-full text-left p-3 transition-transform duration-200 ease-out"
+        >
+            <div className={`relative aspect-[4/5] overflow-hidden rounded-2xl ${project.contain ? 'bg-white' : 'bg-black'}`}>
+                {isVideo ? (
+                    <>
+                        <video ref={videoRef} src={`${project.url}#t=0.5`} muted loop playsInline preload="metadata" className="w-full h-full object-cover" />
+                        <span className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-0">
+                            <span className="w-14 h-14 rounded-full bg-brand flex items-center justify-center shadow-xl">
+                                <Play className="w-5 h-5 text-onaccent ml-0.5" fill="currentColor" />
+                            </span>
+                        </span>
+                    </>
+                ) : (
+                    <img src={project.url} alt={project.title} loading="lazy" className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${project.contain ? 'object-contain p-8' : 'object-cover'}`} />
+                )}
             </div>
-
-            {/* Filter Buttons */}
-            <div className="max-w-7xl mx-auto mb-12 flex flex-wrap gap-4">
-                {categories.map((category) => (
-                    <button
-                        key={category}
-                        onClick={() => setActiveCategory(category)}
-                        className={`px-6 py-2 rounded-full font-sans text-sm font-medium tracking-wide transition-all duration-300 ${activeCategory === category
-                                ? 'bg-[#F5DF77] text-background'
-                                : 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border border-white/10'
-                            }`}
-                        style={{ cursor: 'none' }}
-                    >
-                        {category}
-                    </button>
-                ))}
-            </div>
-
-            {/* Grid */}
-            <div className={`max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 md:gap-12 items-start`}>
-                {filteredProjects.map((project) => (
-                    <div
-                        key={project.id}
-                        className={`portfolio-item group relative rounded-[2rem] overflow-hidden cursor-none bg-white/5 ${project.type === 'video' || project.type === 'youtube' || project.type === 'instagram' ? 'h-auto w-full' : 'h-[50vh] md:h-[60vh]'}`}
-                        onMouseEnter={(e) => {
-                            const ring = document.getElementById('cursor-ring');
-                            if (ring && project.type === 'image') {
-                                ring.classList.add('scale-[4]');
-                                ring.style.backgroundColor = '#F5DF77';
-                                ring.style.mixBlendMode = 'normal';
-                            }
-                        }}
-                        onMouseLeave={(e) => {
-                            const ring = document.getElementById('cursor-ring');
-                            if (ring && project.type === 'image') {
-                                ring.classList.remove('scale-[4]');
-                                ring.style.backgroundColor = 'transparent';
-                                ring.style.mixBlendMode = 'difference';
-                            }
-                        }}
-                    >
-                        {/* Media Container */}
-                        <div className={`${project.type === 'video' || project.type === 'youtube' || project.type === 'instagram' ? 'relative w-full h-auto flex justify-center bg-black/40' : 'absolute inset-0 w-full h-full overflow-hidden'}`}>
-                            {renderMedia(project)}
-                        </div>
-
-                        {/* Dark Gradient Overlay for Readability (only on images) */}
-                        {project.type === 'image' && (
-                            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-90 transition-opacity duration-700 group-hover:opacity-40 pointer-events-none" />
-                        )}
-
-                        {/* Title and Category Overlay (only on images for cleaner video UI) */}
-                        {project.type === 'image' && (
-                            <div className="absolute bottom-8 left-8 md:bottom-12 md:left-12 z-10 pointer-events-none">
-                                <p className="font-mono text-xs md:text-sm text-[#F5DF77] tracking-widest uppercase mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-4 group-hover:translate-y-0">
-                                    {project.category}
-                                </p>
-                                <h3 className="font-display text-3xl md:text-5xl text-white font-bold uppercase transition-transform duration-500 group-hover:-translate-y-2">
-                                    {project.title}
-                                </h3>
-                            </div>
-                        )}
-
-                        {/* Optional Badge for Videos */}
-                        {project.type !== 'image' && (
-                            <div className="absolute top-4 left-4 z-10 pointer-events-none bg-background/80 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 shadow-lg">
-                                <p className="font-mono text-xs text-[#F5DF77] tracking-widest uppercase font-bold">
-                                    {project.category}
-                                </p>
-                            </div>
-                        )}
-                    </div>
-                ))}
-            </div>
-
-            {/* Fallback message */}
-            {filteredProjects.length === 0 && (
-                <div className="py-20 text-center">
-                    <p className="text-white/50 font-sans text-xl">No projects found for this category.</p>
+            {/* Reels have no name: they show as the video only */}
+            {project.title && (
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-3 px-2 pt-4 pb-2">
+                    <h2 className="font-display font-bold text-lg tracking-tight text-ink truncate">{project.title}</h2>
+                    <span className="font-mono text-xs uppercase tracking-wider text-accent shrink-0">{project.category}</span>
                 </div>
+            )}
+        </button>
+    );
+}
+
+export default function PortfolioPage() {
+    usePageMeta("Portfolio", "Logos, reels and brand work delivered by CREATIIX, plus a full demo project you can try.");
+    const [activeCategory, setActiveCategory] = useState('All');
+    const [open, setOpen] = useState(null);
+    const pageRef = useRef(null);
+
+    const projects = activeCategory === 'All' ? portfolioData : portfolioData.filter((p) => p.category === activeCategory);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.fromTo('.fade-up', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out' });
+        }, pageRef);
+        return () => ctx.revert();
+    }, []);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.fromTo('.portfolio-item', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.06, ease: 'power3.out', clearProps: 'opacity,transform' });
+        }, pageRef);
+        return () => ctx.revert();
+    }, [activeCategory]);
+
+    // Close the full view with Escape
+    useEffect(() => {
+        if (!open) return;
+        const onKey = (e) => e.key === 'Escape' && setOpen(null);
+        window.addEventListener('keydown', onKey);
+        return () => window.removeEventListener('keydown', onKey);
+    }, [open]);
+
+    return (
+        <div ref={pageRef} className="relative min-h-screen bg-background text-ink pt-36 pb-24 px-6 md:px-16 overflow-hidden">
+            <PageHeader
+                label="Portfolio"
+                title="Selected"
+                highlight="works."
+                intro="Logos, reels and brand work we have delivered. AI and app projects will be added here as they launch."
+            >
+                {categories.map((c) => (
+                    <FilterChip key={c} active={activeCategory === c} onClick={() => setActiveCategory(c)}>{c}</FilterChip>
+                ))}
+            </PageHeader>
+
+            <i className="glow glow-orange w-[34rem] h-[34rem] -right-60 top-1/2" />
+
+            {/* Demo project */}
+            <Link to="/demo" className="relative max-w-7xl mx-auto mb-6 glass group grid grid-cols-1 md:grid-cols-2 gap-6 p-3 hover:-translate-y-1 transition-transform duration-300">
+                <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-white">
+                    <iframe src="/demos/urban-nest/index.html" title="Urban Nest Properties demo website" tabIndex={-1} className="absolute top-0 left-0 w-[250%] h-[250%] origin-top-left scale-[0.4] pointer-events-none" />
+                </div>
+                <div className="flex flex-col justify-center p-3 md:p-6">
+                    <span className="self-start font-mono text-xs uppercase tracking-wider font-bold bg-brand text-onaccent rounded-2xl px-2.5 py-1 mb-4">Demo project</span>
+                    <h2 className="font-display font-bold text-3xl md:text-4xl tracking-tight leading-[1.05] mb-3">Urban Nest Properties, Mumbai</h2>
+                    <p className="text-ink/60 font-light leading-relaxed mb-6">One fictional property agency, built out across all ten of our services. Try the working website and see the before and after.</p>
+                    <span className="inline-flex items-center gap-2 font-mono text-[13px] uppercase tracking-widest text-ink group-hover:text-accent transition-colors">
+                        Explore the demo <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    </span>
+                </div>
+            </Link>
+
+            <div className="relative max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                {projects.map((project) => <ProjectCard key={project.id} project={project} onOpen={setOpen} />)}
+            </div>
+
+            {/* CTA */}
+            <div className="relative max-w-7xl mx-auto mt-20 glass p-8 md:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <h2 className="font-display font-bold text-3xl md:text-4xl tracking-tight">
+                    Want your project <span className="font-drama italic font-normal text-grad">here next?</span>
+                </h2>
+                <button onClick={goToContact} className="shrink-0 px-8 py-4 rounded-2xl bg-brand text-onaccent font-bold uppercase tracking-widest text-sm hover:brightness-110 transition">
+                    Let's talk
+                </button>
+            </div>
+
+            {/* Full view. Rendered on <body> so it sits above the navbar. */}
+            {open && createPortal(
+                <div className="fixed inset-0 z-[150] bg-black/85 backdrop-blur-md flex items-center justify-center p-6" onClick={() => setOpen(null)} data-lenis-prevent>
+                    <button aria-label="Close" className="absolute top-6 right-6 w-12 h-12 rounded-2xl glass flex items-center justify-center text-white">
+                        <X className="w-5 h-5" />
+                    </button>
+                    <div className="max-h-full max-w-4xl flex flex-col items-center gap-4" onClick={(e) => e.stopPropagation()}>
+                        {open.type === 'video' ? (
+                            <video src={open.url} controls autoPlay playsInline className="max-h-[80vh] rounded-2xl bg-black" />
+                        ) : (
+                            <img src={open.url} alt={open.title} className={`max-h-[80vh] rounded-2xl ${open.contain ? 'bg-white p-10' : ''}`} />
+                        )}
+                        {open.title && <p className="font-display font-bold text-white text-xl">{open.title} <span className="font-mono text-xs uppercase tracking-wider text-[#FF7A00] ml-2">{open.category}</span></p>}
+                    </div>
+                </div>,
+                document.body
             )}
         </div>
     );
-};
-
-export default PortfolioPage;
+}

@@ -1,11 +1,33 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="icon" type="image/png" href="/brand/favicon.png" />
+  <link rel="apple-touch-icon" href="/brand/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CREATIIX – Designing & Marketing</title>
+  <title>CREATIIX – AI, Apps, Design & Marketing</title>
+  <meta name="description"
+    content="CREATIIX builds AI chatbots, AI automation and agents, websites and mobile apps, backed by design and marketing that makes them sell." />
+  <meta property="og:title" content="CREATIIX – AI, Apps, Design & Marketing" />
+  <meta property="og:description"
+    content="AI chatbots, automation and agents, websites and mobile apps, plus the design and marketing behind them." />
+  <meta property="og:image" content="https://creatiix.com/brand/og-image.png" />
+  <meta property="og:url" content="https://creatiix.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://creatiix.com" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#050505" />
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Organization","name":"CREATIIX","url":"https://creatiix.com","logo":"https://creatiix.com/brand/favicon.png","email":"creatiixofficial@creatiix.com","description":"AI chatbots, automation and agents, websites and mobile apps, plus design and marketing."}
+  </script>
+  <script>
+    // Apply the saved mode before the page paints. Dark is the default.
+    try {
+      var saved = localStorage.getItem('creatiix-theme');
+      if (saved === 'light' || saved === 'dark') document.documentElement.setAttribute('data-theme', saved);
+    } catch (e) { }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -13,8 +35,7 @@
     rel="stylesheet">
 </head>
 
-<body
-  class="bg-background text-primary font-body antialiased overflow-x-hidden selection:bg-accent selection:text-primary">
+<body class="font-body antialiased overflow-x-hidden selection:bg-accent selection:text-onaccent">
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
 </body>
