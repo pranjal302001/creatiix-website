@@ -69,12 +69,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 }
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ mode, isSsrBuild }) => {
     const env = loadEnv(mode, process.cwd(), ''); // '' = also read keys without the VITE_ prefix
     return {
         plugins: [react(), chatApi(env), tagManager()],
+        // The build-time page renderer (src/entry-server.jsx) runs in Node, so its
+        // libraries are bundled in with it instead of being loaded separately.
+        ssr: { noExternal: true },
         build: {
-            rollupOptions: {
+            rollupOptions: isSsrBuild ? {} : {
                 output: {
                     // Big libraries in their own files, so they cache separately from page code
                     manualChunks: {

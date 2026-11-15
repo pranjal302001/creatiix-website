@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 
 const KEY = 'creatiix-theme';
-const current = () => document.documentElement.getAttribute('data-theme') || 'dark';
+// No document when pages are rendered at build time; dark is the default there.
+const current = () => (typeof document === 'undefined' ? 'dark' : document.documentElement.getAttribute('data-theme') || 'dark');
 
 // Light / dark mode. Dark is the default; the choice is remembered.
 export function useTheme() {

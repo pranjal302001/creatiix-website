@@ -82,7 +82,8 @@ export default function App() {
     );
 }
 
-function AppLayout() {
+// Exported so the build-time renderer can wrap it in its own router.
+export function AppLayout() {
     const [showIntro, setShowIntro] = useState(SHOW_INTRO);
     const dotRef = useRef(null);
     const ringRef = useRef(null);
