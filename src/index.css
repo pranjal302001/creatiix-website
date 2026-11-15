@@ -84,6 +84,18 @@
 .glow-orange { background: radial-gradient(closest-side, #FF7A00, transparent); }
 .glow-peach { background: radial-gradient(closest-side, #FFD3A3, transparent); }
 
+/* Flat-logo stand-in for the 3D bird */
+@keyframes bird-float { 0%, 100% { transform: translateY(-6px); } 50% { transform: translateY(6px); } }
+.animate-bird-float { animation: bird-float 5s ease-in-out infinite; }
+
+/* Loader video on upright phones: fade its top and bottom edges into the backdrop */
+@media (orientation: portrait) {
+  .intro-video {
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
+  }
+}
+
 /* Show the logo wordmark that matches the current mode */
 .logo-for-light { display: none; }
 :root[data-theme="light"] .logo-for-light { display: block; }

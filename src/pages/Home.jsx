@@ -4,6 +4,7 @@ import Hero from '../components/Hero';
 import SocialProofBar from '../components/SocialProofBar';
 import ServicesGrid from '../components/ServicesGrid';
 import AboutUs from '../components/AboutUs';
+import Founder from '../components/Founder';
 import Portfolio from '../components/Portfolio';
 import Philosophy from '../components/Philosophy';
 import Process from '../components/Process';
@@ -21,6 +22,7 @@ export default function Home() {
             <SocialProofBar />
             <ServicesGrid />
             <AboutUs />
+            <Founder />
             <Philosophy />
             <Process />
             <Portfolio />

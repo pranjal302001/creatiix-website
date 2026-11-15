@@ -1,0 +1,8 @@
+# Never upload private or generated files to Vercel
+.env
+.env.*
+node_modules
+dist
+design-previews
+.claude
+.git

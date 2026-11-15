@@ -3,4 +3,4 @@ Allow: /
 # The demo agency's standalone site is fictional sample content
 Disallow: /demos/
 
-Sitemap: https://creatiix.com/sitemap.xml
+Sitemap: https://creatiix.in/sitemap.xml

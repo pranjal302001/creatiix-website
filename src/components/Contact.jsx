@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, Instagram } from 'lucide-react';
 import { CONTACT, whatsappLink } from '../lib/site';
 import { allServices } from '../data/services';
 
@@ -57,7 +57,7 @@ export default function Contact() {
                         Tell us what you want to build.
                     </h2>
 
-                    <div className="flex flex-col gap-6 border-t border-onaccent/20 pt-8 mt-auto">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-6 border-t border-onaccent/20 pt-8 mt-auto">
                         <div className="flex flex-col gap-1">
                             <span className="font-mono text-[13px] font-bold uppercase tracking-widest text-onaccent/60">Email</span>
                             <a href={`mailto:${CONTACT.email}`} className="text-xl md:text-2xl font-bold font-display tracking-tight hover:text-white transition-colors duration-300">
@@ -68,6 +68,13 @@ export default function Contact() {
                             <span className="font-mono text-[13px] font-bold uppercase tracking-widest text-onaccent/60">WhatsApp</span>
                             <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="text-xl md:text-2xl font-bold font-display tracking-tight hover:text-white transition-colors duration-300">
                                 {CONTACT.whatsappDisplay}
+                            </a>
+                        </div>
+                        <div className="flex flex-col gap-1">
+                            <span className="font-mono text-[13px] font-bold uppercase tracking-widest text-onaccent/60">Instagram</span>
+                            <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 text-xl md:text-2xl font-bold font-display tracking-tight hover:text-white transition-colors duration-300">
+                                <Instagram className="w-5 h-5 md:w-6 md:h-6" />
+                                {CONTACT.instagramHandle}
                             </a>
                         </div>
                     </div>

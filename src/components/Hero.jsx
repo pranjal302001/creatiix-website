@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { Link } from "react-router-dom";
-import { INTRO_DELAY, goToContact } from "../lib/site";
+import { whenIntroDone, goToContact } from "../lib/site";
 import Bird3D from "./Bird3D";
 
 export default function Hero() {
@@ -145,15 +145,16 @@ export default function Hero() {
             // Kinetic Typography Animation
             const chars = agencyNameRef.current.querySelectorAll('.letter');
 
-            gsap.from(chars, {
+            // Entrance: built paused, played once the intro has lifted
+            const enter = gsap.timeline({ paused: true });
+            enter.from(chars, {
                 y: 150,
                 opacity: 0,
                 rotateX: -90,
                 stagger: 0.08,
                 duration: 1.5,
                 ease: "power4.out",
-                delay: INTRO_DELAY + 0.2
-            });
+            }, 0.2);
 
             // Mouse parallax for the massive text
             const parallax = (e) => {
@@ -171,18 +172,19 @@ export default function Hero() {
             cleanupParallax = () => window.removeEventListener("mousemove", parallax);
 
             // Standard Content animation
-            gsap.from(contentRef.current.children, {
+            enter.from(contentRef.current.children, {
                 opacity: 0,
                 y: 50,
                 duration: 1,
                 stagger: 0.12,
                 ease: 'power3.out',
-                delay: INTRO_DELAY + 0.6
-            });
+            }, 0.6);
 
-            gsap.from('.hero-bird', { opacity: 0, scale: 0.8, duration: 1, ease: 'power3.out', delay: INTRO_DELAY + 1 });
+            enter.from('.hero-bird', { opacity: 0, scale: 0.8, duration: 1, ease: 'power3.out' }, 1);
 
-            gsap.fromTo(canvasRef.current, { opacity: 0 }, { opacity: 1, duration: 2, delay: INTRO_DELAY + 0.8 });
+            enter.fromTo(canvasRef.current, { opacity: 0 }, { opacity: 1, duration: 2 }, 0.8);
+
+            whenIntroDone(() => enter.play());
 
             // Scroll Parallax for massive text
             gsap.to(agencyNameRef.current, {
@@ -223,7 +225,7 @@ export default function Hero() {
             <i className="glow glow-peach w-[26rem] h-[26rem] -right-24 -top-24 z-0" />
 
             {/* 3D origami bird from the logo (desktop only) */}
-            <Bird3D className="hero-bird hidden lg:flex absolute right-[4vw] top-1/2 -translate-y-1/2 w-[38vw] max-w-[560px] aspect-square z-20 pointer-events-none" />
+            <Bird3D className="hero-bird absolute aspect-square z-20 pointer-events-none right-3 top-20 w-28 md:right-[4vw] md:top-0 md:bottom-0 md:my-auto md:w-[30vw] lg:w-[38vw] md:max-w-[560px]" />
 
             {/* Gradient Overlay */}
             <div className="absolute inset-0 z-10 bg-gradient-to-t from-background/80 via-background/30 to-transparent pointer-events-none" />

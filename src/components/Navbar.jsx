@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
-import { Sun, Moon, Menu, X } from 'lucide-react';
+import { Sun, Moon, Menu, X, Instagram } from 'lucide-react';
 import { useTheme } from '../lib/theme';
-import { INTRO_DELAY, SHOW_BLOG, goToContact, scrollToId } from '../lib/site';
+import { CONTACT, SHOW_BLOG, goToContact, scrollToId, whenIntroDone } from '../lib/site';
 
 const links = [
     { label: 'About', to: '/#about' },
     { label: 'Services', to: '/services' },
     { label: 'Portfolio', to: '/portfolio' },
+    { label: 'Demo', to: '/demo' },
     ...(SHOW_BLOG ? [{ label: 'Blogs', to: '/blogs' }] : []),
 ];
 
@@ -28,10 +29,11 @@ export default function Navbar() {
     }, []);
 
     useEffect(() => {
-        gsap.fromTo(navRef.current,
+        const enter = gsap.fromTo(navRef.current,
             { y: -100, opacity: 0 },
-            { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: INTRO_DELAY + 0.2 }
+            { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.2, paused: true }
         );
+        whenIntroDone(() => enter.play());
     }, []);
 
     // Close the mobile menu whenever the page changes
@@ -62,7 +64,7 @@ export default function Navbar() {
         <>
             <nav
                 ref={navRef}
-                className={`fixed top-4 md:top-6 inset-x-0 mx-auto z-[90] transition-[width,background-color,border-color,box-shadow] duration-500 ease-[cubic-bezier(0.87,0,0.13,1)] flex items-center justify-between pl-5 pr-2.5 py-2.5 rounded-2xl ${scrolled || menuOpen
+                className={`fixed top-4 md:top-6 inset-x-0 mx-auto max-w-[92%] z-[90] transition-[width,background-color,border-color,box-shadow] duration-500 ease-[cubic-bezier(0.87,0,0.13,1)] flex items-center justify-between pl-5 pr-2.5 py-2.5 rounded-2xl ${scrolled || menuOpen
                     ? 'w-[92%] lg:w-[900px] glass !bg-background/70'
                     : 'w-[92%] lg:w-[1080px] border border-transparent'
                     }`}>
@@ -86,6 +88,16 @@ export default function Navbar() {
 
                 {/* Right side */}
                 <div className="flex items-center gap-2">
+                    <a
+                        href={CONTACT.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="CREATIIX on Instagram"
+                        title="Instagram"
+                        className="hidden md:flex w-10 h-10 rounded-2xl border border-ink/15 items-center justify-center text-ink hover:text-accent hover:border-accent transition-colors"
+                    >
+                        <Instagram className="w-4 h-4" />
+                    </a>
                     <ThemeButton />
                     <button onClick={goToContact} className="hidden md:block px-6 py-2.5 bg-brand text-onaccent font-body text-xs font-bold uppercase tracking-widest rounded-2xl hover:brightness-110 transition-colors duration-300">
                         Let's talk
@@ -111,6 +123,9 @@ export default function Navbar() {
                 <button onClick={() => { setMenuOpen(false); goToContact(); }} className="mt-8 py-4 bg-brand text-onaccent font-bold uppercase tracking-widest text-sm rounded-2xl">
                     Let's talk
                 </button>
+                <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" className="mt-3 py-4 glass text-ink font-bold uppercase tracking-widest text-sm flex items-center justify-center gap-3">
+                    <Instagram className="w-4 h-4" /> Follow on Instagram
+                </a>
             </div>
         </>
     );

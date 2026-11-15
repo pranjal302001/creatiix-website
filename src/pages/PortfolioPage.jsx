@@ -3,10 +3,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Play, X } from 'lucide-react';
+import { ArrowUpRight, Instagram, Play, X } from 'lucide-react';
 import portfolioData from '../data/portfolioData.json';
 import PageHeader, { FilterChip } from '../components/PageHeader';
-import { goToContact } from '../lib/site';
+import { CONTACT, goToContact } from '../lib/site';
 
 const categories = ['All', ...new Set(portfolioData.map((item) => item.category))];
 
@@ -119,6 +119,20 @@ export default function PortfolioPage() {
             <div className="relative max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 {projects.map((project) => <ProjectCard key={project.id} project={project} onOpen={setOpen} />)}
             </div>
+
+            {/* Instagram */}
+            <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" className="relative max-w-7xl mx-auto mt-6 glass group p-6 md:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:-translate-y-1 transition-transform duration-300">
+                <span className="flex items-center gap-4">
+                    <span className="w-12 h-12 shrink-0 rounded-2xl bg-brand text-onaccent flex items-center justify-center"><Instagram className="w-5 h-5" /></span>
+                    <span>
+                        <span className="block font-display font-bold text-xl md:text-2xl tracking-tight">More reels and posts on Instagram</span>
+                        <span className="block text-ink/60 font-light">Follow {CONTACT.instagramHandle} for our latest work.</span>
+                    </span>
+                </span>
+                <span className="inline-flex items-center gap-2 font-mono text-[13px] uppercase tracking-widest text-ink group-hover:text-accent transition-colors">
+                    Open Instagram <ArrowUpRight className="w-4 h-4" />
+                </span>
+            </a>
 
             {/* CTA */}
             <div className="relative max-w-7xl mx-auto mt-20 glass p-8 md:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">

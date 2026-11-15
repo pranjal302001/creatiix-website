@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 // The logo's origami bird as a small 3D object. Each piece of the mark is an
 // extruded shape, folded slightly out of plane, so it reads as paper when it turns.
@@ -15,18 +15,19 @@ const CENTER = [305, 143];
 
 export default function Bird3D({ className = '' }) {
     const mountRef = useRef(null);
+    // If WebGL is unavailable or fails, the flat logo mark is shown instead,
+    // so this spot is never empty.
+    const [flat, setFlat] = useState(false);
 
     useEffect(() => {
         const mount = mountRef.current;
-        // Desktop only: skip the extra WebGL work on phones and small tablets.
-        if (!mount || window.innerWidth < 1024) return;
+        if (!mount) return;
 
         let cancelled = false;
         let cleanup = () => {};
-        import('three').then((THREE) => {
-            if (cancelled) return;
 
-            const size = () => Math.min(mount.clientWidth, mount.clientHeight);
+        const start = (THREE) => {
+            const size = () => Math.max(1, Math.min(mount.clientWidth, mount.clientHeight));
             const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             renderer.setSize(size(), size());
@@ -70,8 +71,15 @@ export default function Bird3D({ className = '' }) {
             };
             window.addEventListener('mousemove', onMove);
 
-            const onResize = () => renderer.setSize(size(), size());
-            window.addEventListener('resize', onResize);
+            // Follow the box itself, not just the window: the box changes size when
+            // the window crosses a breakpoint or the layout settles after load.
+            const sizer = new ResizeObserver(() => renderer.setSize(size(), size()));
+            sizer.observe(mount);
+
+            // The browser can take the graphics context away (many tabs, GPU reset).
+            // Swap to the flat mark rather than leaving a blank square.
+            const onLost = (e) => { e.preventDefault(); renderer.domElement.style.display = 'none'; setFlat(true); };
+            renderer.domElement.addEventListener('webglcontextlost', onLost);
 
             const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             const clock = new THREE.Clock();
@@ -87,14 +95,31 @@ export default function Bird3D({ className = '' }) {
             cleanup = () => {
                 renderer.setAnimationLoop(null);
                 window.removeEventListener('mousemove', onMove);
-                window.removeEventListener('resize', onResize);
+                sizer.disconnect();
+                renderer.domElement.removeEventListener('webglcontextlost', onLost);
                 disposables.forEach((d) => d.dispose());
                 renderer.dispose();
+                // Hand the graphics context back now; browsers allow only a few per page.
+                renderer.forceContextLoss();
                 renderer.domElement.remove();
             };
-        });
+        };
+
+        // Retry the download once: a dropped connection should not cost the logo.
+        const load = () => import('three').catch(() => new Promise((r) => setTimeout(r, 1500)).then(() => import('three')));
+        load()
+            .then((THREE) => {
+                if (cancelled) return;
+                start(THREE);
+            })
+            .catch(() => { if (!cancelled) setFlat(true); });
+
         return () => { cancelled = true; cleanup(); };
     }, []);
 
-    return <div ref={mountRef} className={`flex items-center justify-center ${className}`} aria-hidden="true" />;
+    return (
+        <div ref={mountRef} className={`flex items-center justify-center ${className}`} aria-hidden="true">
+            {flat && <img src="/brand/mark.png" alt="" className="absolute inset-0 m-auto w-3/4 h-auto animate-bird-float" />}
+        </div>
+    );
 }
