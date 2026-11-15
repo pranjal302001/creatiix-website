@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { MessageCircle, Instagram } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { CONTACT, whatsappLink } from '../lib/site';
 import { allServices } from '../data/services';
 
@@ -118,6 +119,9 @@ export default function Contact() {
                             <MessageCircle className="w-4 h-4" />
                             {sent ? 'Opened in WhatsApp ✓' : 'Send on WhatsApp'}
                         </button>
+                        <p className="text-ink/40 text-[13px] text-center shrink-0">
+                            Nothing is sent until you press send in WhatsApp. <Link to="/privacy" className="underline underline-offset-4 hover:text-accent transition-colors">Privacy Policy</Link>
+                        </p>
                     </form>
                 </div>
             </div>

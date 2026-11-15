@@ -13,6 +13,11 @@ export const CONTACT = {
     instagramHandle: '@creatiix.in',
 };
 
+// Google Analytics property that counts visits. It is loaded through Google Tag
+// Manager (container GTM-WH344X3V, added at build time in vite.config.js), not
+// from here. This value only switches on the statistics section of the Privacy Policy.
+export const GA_ID = 'G-WGGKRMQRYG';
+
 // Opens a WhatsApp chat with the studio, with `text` already typed in.
 export const whatsappLink = (text = "Hi CREATIIX, I'd like to talk about a project.") =>
     `https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent(text)}`;

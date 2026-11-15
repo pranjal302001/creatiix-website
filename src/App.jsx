@@ -14,6 +14,7 @@ const Blogs = lazy(() => import('./pages/Blogs'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
 const PortfolioPage = lazy(() => import('./pages/PortfolioPage'));
 const DemoProject = lazy(() => import('./pages/DemoProject'));
+const Privacy = lazy(() => import('./pages/Privacy'));
 const ChatWidget = lazy(() => import('./components/ChatWidget'));
 import { usePageMeta } from './lib/usePageMeta';
 import { SHOW_INTRO, setLenis, scrollToTop, scrollToId, SHOW_BLOG } from './lib/site';
@@ -176,6 +177,7 @@ function AppLayout() {
                     <Route path="/services" element={<Services />} />
                     <Route path="/portfolio" element={<PortfolioPage />} />
                     <Route path="/demo" element={<DemoProject />} />
+                    <Route path="/privacy" element={<Privacy />} />
                     {SHOW_BLOG && <Route path="/blogs" element={<Blogs />} />}
                     {SHOW_BLOG && <Route path="/blogs/:id" element={<BlogPost />} />}
                     <Route path="*" element={<NotFound />} />
