@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ArrowUpRight } from 'lucide-react';
+import { servicePageSlugs } from '../data/servicePages';
 import { allServices } from '../data/services';
 import AIVisual from './AIVisuals';
 
@@ -44,7 +45,7 @@ export default function ServicesGrid() {
                         // Outer div takes the scroll reveal; the card itself takes the 3D tilt.
                         <div key={s.slug} className="svc-reveal">
                             <Link
-                                to={`/services#${s.slug}`}
+                                to={servicePageSlugs.includes(s.slug) ? `/services/${s.slug}` : `/services#${s.slug}`}
                                 data-tilt
                                 className="glass group flex flex-col h-full p-4 transition-transform duration-200 ease-out will-change-transform"
                             >

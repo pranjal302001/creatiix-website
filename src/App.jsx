@@ -15,8 +15,10 @@ const BlogPost = lazy(() => import('./pages/BlogPost'));
 const PortfolioPage = lazy(() => import('./pages/PortfolioPage'));
 const DemoProject = lazy(() => import('./pages/DemoProject'));
 const Privacy = lazy(() => import('./pages/Privacy'));
+const ServicePage = lazy(() => import('./pages/ServicePage'));
 const ChatWidget = lazy(() => import('./components/ChatWidget'));
 import { usePageMeta } from './lib/usePageMeta';
+import { servicePageSlugs } from './data/servicePages';
 import { SHOW_INTRO, setLenis, scrollToTop, scrollToId, SHOW_BLOG } from './lib/site';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -176,6 +178,9 @@ export function AppLayout() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/services" element={<Services />} />
+                    {servicePageSlugs.map((slug) => (
+                        <Route key={slug} path={`/services/${slug}`} element={<ServicePage slug={slug} />} />
+                    ))}
                     <Route path="/portfolio" element={<PortfolioPage />} />
                     <Route path="/demo" element={<DemoProject />} />
                     <Route path="/privacy" element={<Privacy />} />

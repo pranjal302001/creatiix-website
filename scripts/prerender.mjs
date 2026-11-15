@@ -1,6 +1,7 @@
 // Runs after "vite build". Writes one finished HTML file per page into dist/,
 // each with its own title, description, canonical link and page content.
 // To add a page: add its address to ROUTES (and to public/sitemap.xml).
+// Single-service pages (/services/<slug>) are added automatically from src/data/servicePages.js.
 // Only addresses listed here exist on the live site: anything else gets 404.html
 // with a real "not found" status. So when the blog is switched on (SHOW_BLOG),
 // /blogs and each /blogs/<id> must be added here as well.
@@ -12,7 +13,7 @@ const ROUTES = ['/', '/services', '/portfolio', '/demo', '/privacy'];
 const NOT_FOUND = '/404'; // rendered as the "Page not found" screen, saved as 404.html
 
 const dist = path.resolve('dist');
-const { render } = await import(pathToFileURL(path.resolve('dist-ssr/entry-server.js')).href);
+const { render, dataRoutes } = await import(pathToFileURL(path.resolve('dist-ssr/entry-server.js')).href);
 const template = await readFile(path.join(dist, 'index.html'), 'utf8');
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
@@ -37,7 +38,7 @@ async function page(route, { noindex = false } = {}) {
     return out.replace('<div id="root"></div>', `<div id="root" data-prerendered>${html}</div>`);
 }
 
-for (const route of ROUTES) {
+for (const route of [...ROUTES, ...dataRoutes]) {
     const file = route === '/' ? path.join(dist, 'index.html') : path.join(dist, route, 'index.html');
     await mkdir(path.dirname(file), { recursive: true });
     await writeFile(file, await page(route));

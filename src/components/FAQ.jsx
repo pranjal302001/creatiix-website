@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
 
-const faqs = [
+const homeFaqs = [
     {
         q: "What can an AI chatbot actually do for my business?",
         a: "It answers customer questions from your own content, captures and qualifies leads, books appointments and shares order updates, on your website, WhatsApp or Instagram, at any hour. When a human is needed, it hands the chat to your team."
@@ -28,7 +28,8 @@ const faqs = [
     }
 ];
 
-export default function FAQ() {
+// `items` lets a service page show its own questions in the same design.
+export default function FAQ({ items: faqs = homeFaqs }) {
     const sectionRef = useRef(null);
     const [openIndex, setOpenIndex] = useState(null);
 

@@ -9,6 +9,7 @@ import { industryConcepts } from '../data/aiServices';
 import AIVisual from '../components/AIVisuals';
 import { goToContact } from '../lib/site';
 import { demoBySlug } from '../data/demoProject';
+import { servicePageSlugs } from '../data/servicePages';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -91,6 +92,11 @@ function ServicePanel({ service, index, total }) {
                         {demoBySlug[service.slug] && demoBySlug[service.slug].status !== 'soon' && (
                             <Link to={`/demo#${service.slug}`} className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl glass text-ink font-bold uppercase tracking-widest text-xs hover:text-accent transition-colors">
                                 {demoBySlug[service.slug].status === 'work' ? 'See our work' : 'See demo'}
+                            </Link>
+                        )}
+                        {servicePageSlugs.includes(service.slug) && (
+                            <Link to={`/services/${service.slug}`} className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl glass text-ink font-bold uppercase tracking-widest text-xs hover:text-accent transition-colors">
+                                Learn more
                             </Link>
                         )}
                         <span className="inline-flex items-center gap-2 font-mono text-[13px] uppercase tracking-widest text-ink/50">

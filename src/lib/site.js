@@ -11,6 +11,7 @@ export const CONTACT = {
     whatsappDisplay: '+91 70454 02332',
     instagram: 'https://www.instagram.com/creatiix.in',
     instagramHandle: '@creatiix.in',
+    location: 'Mumbai, India',
 };
 
 // Google Analytics property that counts visits. It is loaded through Google Tag

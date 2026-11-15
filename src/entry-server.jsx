@@ -7,6 +7,10 @@ import { renderToPipeableStream } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { AppLayout } from './App.jsx';
 import { renderedMeta } from './lib/usePageMeta';
+import { servicePageSlugs } from './data/servicePages';
+
+// Pages that exist because of data, so the prerender script picks them up by itself.
+export const dataRoutes = servicePageSlugs.map((slug) => `/services/${slug}`);
 
 export function render(url) {
     renderedMeta.current = null;

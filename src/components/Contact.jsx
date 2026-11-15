@@ -78,6 +78,10 @@ export default function Contact() {
                                 {CONTACT.instagramHandle}
                             </a>
                         </div>
+                        <div className="flex flex-col gap-1">
+                            <span className="font-mono text-[13px] font-bold uppercase tracking-widest text-onaccent/60">Based in</span>
+                            <span className="text-xl md:text-2xl font-bold font-display tracking-tight">{CONTACT.location}</span>
+                        </div>
                     </div>
                 </div>
 
